@@ -4,15 +4,13 @@ const FACING_MODE_USER = "user";
 let gCurrentCameraFacingMode = FACING_MODE_ENVIRONMENT;
 
 // Flip camera
-const switchCamera = () => {
-
+function switchCamera () {
   if( gCurrentCameraFacingMode === FACING_MODE_ENVIRONMENT ){
     gCurrentCameraFacingMode = FACING_MODE_USER;
   }else{
     gCurrentCameraFacingMode = FACING_MODE_ENVIRONMENT;
   }
   startStreamingVideo();
-
 }
 
 // Flip Cmera
@@ -20,31 +18,27 @@ const filpCameraElem = document.getElementById( "flipCameraImage" );
 filpCameraElem.addEventListener( "mouseover", async ev => {
   filpCameraElem.style.opacity = 0.7;
 });
+
 filpCameraElem.addEventListener( "mouseout", async ev => {
   filpCameraElem.style.opacity = 0.3;
 });
+
 filpCameraElem.addEventListener( "click", async ev => {
   switchCamera();
 });
-
-
 
 // Video element
 const video = document.querySelector( "#video" );
 
 // On Streaming
-const startStreamingVideo = () => {
-      
+function startStreamingVideo () {
   if( navigator.mediaDevices.getUserMedia ){
-
     navigator.mediaDevices.getUserMedia( 
       { video: { facingMode: gCurrentCameraFacingMode } } 
     ).then( ( stream ) => {
       video.srcObject = stream;
-    } );
-    
+    } );    
   }
-
 }
 startStreamingVideo();
 
@@ -81,25 +75,22 @@ video.onloadedmetadata = () => {
     const INTERVAL = 100;
     setInterval( decodeQR, INTERVAL );
   }
-
 }
 
 // QR decoding
 let previousDecodedData = undefined;
 
 // Decode
-let result = new Set();
-let result2 = [];
+let resultSet = new Set();
+let resultArray = [];
 
 function decodeQR (){
-
   // Capture: draw to hidden canvas
   const canvas = document.getElementById( 'hiddenCanvasForQR' );
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   const ctx = canvas.getContext('2d');
   ctx.drawImage( video, 0, 0, canvas.width, canvas.height );
-
   const imageData = ctx.getImageData( 0, 0, canvas.width, canvas.height );
   const code = jsQR( imageData.data, imageData.width, imageData.height, {
     inversionAttempts: "dontInvert",
@@ -113,30 +104,9 @@ function decodeQR (){
       if( previousDecodedData === undefined ){
         decodedDataText.value = '';
       }
-      result.add(code.data);
-      result2 = Array.from(result); 
-      decodedDataText.value = result2.sort((a,b)=>{return a - b});
-//    decodedDataText.value = code.data + '\n' + decodedDataText.value;
+      resultSet.add(code.data);
+      resultArray = Array.from(resultSet); 
+      decodedDataText.value = resultArray.sort((a,b)=>{return a - b});
     }
-    //previousDecodedData = code.data;
   }
 }
-
-// Zero padding function 2 digits
-function padZero2Digit ( num ) {
-  return ( num < 10 ? "0" : "" ) + num;
-}
-
-// Zero padding function 3 digits
-function padZero3Digit ( num ) {
-  if( num > 99 ){
-    return "" + num;
-  }else if( num > 9 ){
-    return "0" + num;
-  }else{
-    return "00" + num;
-  }
-}
-
-// 昇順に
-//[1,6,-4,66].sort((a,b)=>{return a - b})
