@@ -1,4 +1,3 @@
-
 // Camera facing mode = flip mode
 const FACING_MODE_ENVIRONMENT = "environment";
 const FACING_MODE_USER = "user";
@@ -49,8 +48,8 @@ const startStreamingVideo = () => {
 }
 startStreamingVideo();
 
-// Capture image from video streaming after loading the video stream.
-// Reference => https://qiita.com/iwaimagic/items/1d16a721b36f04e91aed
+// ビデオストリームを読み込んだ後に、ビデオストリーミングから画像をキャプチャする
+// https://qiita.com/iwaimagic/items/1d16a721b36f04e91aed
 let gIsLoaded = false;
 video.onloadedmetadata = () => {
 
@@ -68,29 +67,31 @@ video.onloadedmetadata = () => {
       const ctx = hiddenCanvas.getContext('2d');
       ctx.drawImage( video, 0, 0, hiddenCanvas.width, hiddenCanvas.height );
 
-      // Download: load DataURL and convert to png
+      // DataURLの読み込みとpngへの変換
       const link = document.getElementById( 'hiddenLink' );
       link.href = hiddenCanvas.toDataURL();
-      
-      // document.getElementById('hiddenCanvas').src = hiddenCanvas.toDataURL();
-      link.download = getYYYYMMDD_hhmmss( true, false ) + ".png";
+
+      link.download = "save.png";
       link.click();
 
     });
 
     btCapture.disabled = false;
 
-    const INTERVAL = 200;
+    const INTERVAL = 100;
     setInterval( decodeQR, INTERVAL );
-
   }
 
 }
 
-
 // QR decoding
 let previousDecodedData = undefined;
-const decodeQR = () => {
+
+// Decode
+let result = new Set();
+let result2 = [];
+
+function decodeQR (){
 
   // Capture: draw to hidden canvas
   const canvas = document.getElementById( 'hiddenCanvasForQR' );
@@ -99,73 +100,35 @@ const decodeQR = () => {
   const ctx = canvas.getContext('2d');
   ctx.drawImage( video, 0, 0, canvas.width, canvas.height );
 
-  // Decode: 
   const imageData = ctx.getImageData( 0, 0, canvas.width, canvas.height );
   const code = jsQR( imageData.data, imageData.width, imageData.height, {
     inversionAttempts: "dontInvert",
   } );
   
   if ( code ) {
-    // console.log( code );
-
     if( document.getElementById( 'cbIgnoreSameData' ).checked &&
         ( code.data === previousDecodedData ) ){
-        // Ignore
     }else{
-
       const decodedDataText = document.getElementById( 'decodedData' );
       if( previousDecodedData === undefined ){
         decodedDataText.value = '';
       }
-
-      decodedDataText.value = getYYYYMMDD_hhmmss( true, true ) 
-                                + ': ' + code.data + '\n' + decodedDataText.value;
-
+      result.add(code.data);
+      result2 = Array.from(result); 
+      decodedDataText.value = result2.sort((a,b)=>{return a - b});
+//    decodedDataText.value = code.data + '\n' + decodedDataText.value;
     }
-
-    previousDecodedData = code.data;
-
-  } else {
-    // console.log( 'no data' );
+    //previousDecodedData = code.data;
   }
-
-}
-
-
-// Reference => https://gist.github.com/froop/962669
-const getYYYYMMDD_hhmmss = ( isNeedUS, isNeedmsec ) => {
-
-  const now = new Date();
-  let retVal = '';
-
-  // YYMMDD
-  retVal += now.getFullYear();
-  retVal += padZero2Digit( now.getMonth() + 1 );
-  retVal += padZero2Digit( now.getDate() );
-  
-  if( isNeedUS ){ retVal += '_'; }
-  
-  // hhmmss
-  retVal += padZero2Digit( now.getHours() );
-  retVal += padZero2Digit( now.getMinutes() );
-  retVal += padZero2Digit( now.getSeconds() );
-
-  // .sss (msec)
-  if( isNeedmsec ){
-    retVal += '.' + padZero3Digit( now.getMilliseconds() );
-  }
-
-  return retVal;
-
 }
 
 // Zero padding function 2 digits
-const padZero2Digit = ( num ) => {
+function padZero2Digit ( num ) {
   return ( num < 10 ? "0" : "" ) + num;
 }
 
 // Zero padding function 3 digits
-const padZero3Digit = ( num ) => {
+function padZero3Digit ( num ) {
   if( num > 99 ){
     return "" + num;
   }else if( num > 9 ){
@@ -175,3 +138,5 @@ const padZero3Digit = ( num ) => {
   }
 }
 
+// 昇順に
+//[1,6,-4,66].sort((a,b)=>{return a - b})

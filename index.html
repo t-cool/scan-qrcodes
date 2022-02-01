@@ -8,7 +8,6 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Favion -->
         <link rel="icon" href="./images/favicon.ico">
 
         <!-- QR decoding -->
@@ -37,18 +36,14 @@
 
             <div class="operationTitleText"></div>
             <div class="operationContent"> 
-              <textarea id="decodedData" cols="30" rows="5" wrap="off">QRコードの解読結果</textarea>                   
-              <br> 
-              <div class="operationContent"> 
-                <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised" id="btCapture" disabled="true">画像の保存</button>
-            </div>
-
-              <input type="checkbox" id="cbIgnoreSameData" checked="checked" style="display:none">
-            </div>
-            </div>
+                <textarea id="decodedData" cols="30" rows="5" wrap="soft">QRコードの解読結果</textarea>                   
+                <br> 
+                <div class="operationContent"> 
+                    <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised" id="btCapture" disabled="true">画像の保存</button>
                 </div>
-            </td>
-        </tr></table>
+                <input type="checkbox" id="cbIgnoreSameData" checked="checked" style="display:none">
+            </div>
+        </div>
         
         <!-- Script -->
         <script type="text/javascript" src="index.js"></script>
