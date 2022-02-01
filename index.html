@@ -22,82 +22,34 @@
     </head>
 
     <body>        
-        <!-- Title -->
-        <div id="titleText" class="titleText"> 
-            HTML5 Webcam Tester
+        <div id="videoContainer">
+            <img id="flipCameraImage" src="./images/flipCamera.png" width="60px">
+            <video playsinline muted autoplay id="video"></video>
         </div>
-
-        <!-- Description -->
-        <div id="descriptionText" class="descriptionText"> 
-            HTML5でWebcamを扱うテスト。キャプチャしてPNGファイルとしてダウンロードできるよ。<br>
-            HTML5 Webcam function tester. You can also capture and download image as a PNG file.
-        </div>
-
-        <!-- Contents -->
-        <table><tr>
-            <!-- Left region: Video Container -->
-            <td>
-                <!-- Streaming video -->
-                <div id="videoContainer">
-                    <img id="flipCameraImage" src="./images/flipCamera.png" width="60px">
-                    <video playsinline muted autoplay id="video"></video>
-                </div>
                 
-                <!-- Hidden items for capture => download -->
-                <div id="hiddenContainer">
-                    <a id="hiddenLink"></a>
-                    <canvas id="hiddenCanvas"></canvas>
-                    <canvas id="hiddenCanvasForQR"></canvas>
-                </div>
-            </td>
+        <div id="hiddenContainer">
+            <a id="hiddenLink"></a>
+            <canvas id="hiddenCanvas"></canvas>
+            <canvas id="hiddenCanvasForQR"></canvas>
+        </div>
 
-            <!-- Right region: Operation Region -->
-            <td>
-                <div id="operation" class="operation"> 
-                    <div class="operationTitleTextTop"> 
-                        1. Connect WebCam & give a permission.
-                    </div>
-                    <div class="operationContent"> 
-                        <img src="./images/permission.png" width="300px">
-                    </div>
+        <div id="operation" class="operation">                 
 
-                    <div class="operationTitleText"> 
-                        2. Anytime, you can capture & download it.
-                    </div>
-                    <div class="operationContent"> 
-                        <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised" id="btCapture" disabled="true">Capture</button>
-                    </div>
+            <div class="operationTitleText"></div>
+            <div class="operationContent"> 
+              <textarea id="decodedData" cols="30" rows="5" wrap="off">QRコードの解読結果</textarea>                   
+              <br> 
+              <div class="operationContent"> 
+                <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised" id="btCapture" disabled="true">画像の保存</button>
+            </div>
 
-                    <div class="operationTitleText"> 
-                        3. Anytime, you can decode QR codes.
-                    </div>
-                    <div class="operationContent"> 
-                      <textarea id="decodedData" cols="30" rows="5" wrap="off">Result of decoding QR codes.</textarea>                   
-                      <br> 
-                      <input type="checkbox" id="cbIgnoreSameData" checked="checked">
-                      <label for="cbIgnoreSameData">: Ignore Continuous same data decoding.</label>
-                    </div>
-
-                    <div class="operationTitleText"> 
-                        Appendix.
-                    </div>
-                    <div class="operationContent"> 
-                        <button class="mui-btn mui-btn--small mui-btn--raised" id="btShowReadMe">Show "ReadMe"
-                            <i class="fas fa-external-link-alt"></i>
-                        </button>
-                    </div>
+              <input type="checkbox" id="cbIgnoreSameData" checked="checked" style="display:none">
+            </div>
+            </div>
                 </div>
             </td>
         </tr></table>
         
-        <!-- Copywrite -->
-        <div id="copyWriteText"> 
-            <a href="https://github.com/tetunori/HTML5WebcamTester" target="_blank">Hosted on GitHub</a>. 
-            Version 1.2.0. Copyright (c) 2020 Tetsunori NAKAYAMA. MIT License.
-            <br>
-            QR Code is registered trademarks of DENSO WAVE INCORPORATED in Japan and in other countries.
-        </div>  
-
         <!-- Script -->
         <script type="text/javascript" src="index.js"></script>
     </body>

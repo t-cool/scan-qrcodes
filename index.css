@@ -15,22 +15,17 @@ td{
 }
 
 #videoContainer {
-  border: 5px solid;
-  border-color: black;
+  margin-left: 100px;
+
 }
 
 #video {
 	background-color: black;
+  width:500px;
 }
 
 #hiddenContainer {
   display: none;
-}
-
-#titleText {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 15px;
 }
 
 #descriptionText {
@@ -48,9 +43,11 @@ td{
 
 #decodedData {
   font-size: 12px;
+  width: 300px;
+  height: 200px;
+  margin-left: 100px;
 }
 
-/* WARNING: in table tag */ 
 div.operation {
   font-size: 15px;
   margin-left: 20px;
@@ -83,3 +80,7 @@ div.operationContent {
 }
 
 #copyWriteText a { color: black } 
+
+#btCapture{
+  margin-left: 200px;
+}
