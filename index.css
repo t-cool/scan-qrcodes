@@ -15,13 +15,13 @@ td{
 }
 
 #videoContainer {
-  margin-left: 100px;
+  margin-left: 180px;
 
 }
 
 #video {
 	background-color: black;
-  width:500px;
+  width:200px;
 }
 
 #hiddenContainer {
