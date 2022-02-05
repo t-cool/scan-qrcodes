@@ -35,8 +35,6 @@ function startStreamingVideo () {
   if( navigator.mediaDevices.getUserMedia ){
     navigator.mediaDevices.getUserMedia( 
       { video: {
-        width: 50,
-        height:50,
         facingMode: gCurrentCameraFacingMode } } 
     ).then( ( stream ) => {
       video.srcObject = stream;
