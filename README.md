@@ -1,6 +1,6 @@
-# cheQ
+# scan-qrcodes-js
 
-App to manage student submissions with QR Code
+You can scan QR Codes on browsers.
 
 # Usage
 
