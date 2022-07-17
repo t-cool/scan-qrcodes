@@ -1,0 +1,13 @@
+altgraph==0.17.2
+click==8.0.3
+Flask==1.1.2
+gunicorn==20.1.0
+itsdangerous==2.0.1
+Jinja2==3.0.3
+macholib==1.15.2
+MarkupSafe==2.0.1
+Pillow==9.0.0
+pyinstaller==4.8
+pyinstaller-hooks-contrib==2022.0
+pyzbar==0.1.8
+Werkzeug==0.16.0

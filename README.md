@@ -1,7 +1,11 @@
 # scan-qrcodes
 
-You can scan QR Codes on browsers.
+recognize multiple QR codes in one photo
 
-# Usage
+## Usage
 
-When video is taken, the QR Code is recognized as sequentially numbered.
+Upload to Heroku and build to use.
+
+## License
+
+MIT
