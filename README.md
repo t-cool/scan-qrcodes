@@ -1,4 +1,4 @@
-# scan-qrcodes-js
+# scan-qrcodes
 
 You can scan QR Codes on browsers.
 
